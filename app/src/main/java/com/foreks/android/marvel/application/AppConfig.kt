@@ -4,6 +4,7 @@ import android.content.Context
 import com.foreks.android.marvel.di.AppComponent
 import com.foreks.android.marvel.di.AppModule
 import com.foreks.android.marvel.di.DaggerAppComponent
+import com.foreks.android.marvel.di.MarvelRepoModule
 
 
 object AppConfig {

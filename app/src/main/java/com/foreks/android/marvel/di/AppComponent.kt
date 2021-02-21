@@ -14,20 +14,15 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-@Component(modules = [AppModule::class, NetModule::class])
+@Component(modules = [AppModule::class, NetModule::class, MarvelRepoModule::class])
 @AppScope
 interface AppComponent {
     fun getContext(): Context
     fun getApiInterface(): RestApi
     fun getRetrofit(): Retrofit
+    fun getMarvelRepo(): MarvelRepo
 
 }
-
-interface BaseAppComponentBuilder<out T, out K> {
-    fun appComponent(appComponent: AppComponent = AppConfig.appComponent): T
-    fun build(): K
-}
-
 
 @Module
 class AppModule(private val context: Context) {
@@ -40,10 +35,9 @@ class AppModule(private val context: Context) {
 }
 
 @Module
-class MarvelRepoModule(private val restApi: RestApi) {
+class MarvelRepoModule {
     @Provides
-    @AppScope
-    fun provideMarvelRepo() = MarvelRepo(restApi)
+    fun provideMarvelRepo(restApi: RestApi) = MarvelRepo(restApi)
 }
 
 

@@ -29,7 +29,7 @@ class DetailActivityViewModel @Inject constructor(private val repo: MarvelRepo) 
         repo.singleComics(id).map {
             it.filter {
                 it.date.after(simpleDateFormat.parse(date))
-            }.sortedByDescending { it.date }
+            }.sortedByDescending { it.date }.take(10)
         }
             .subscribe({
                 _mutableComicsLiveData.postValue(it)
